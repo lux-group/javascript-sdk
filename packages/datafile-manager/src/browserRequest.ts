@@ -64,7 +64,11 @@ export function makeGetRequest(reqUrl: string, headers: Headers): AbortableReque
       if (req.readyState === READY_STATE_DONE) {
         const statusCode = req.status;
         if (statusCode === 0) {
-          reject(new Error('Request error'));
+          const url = `url: ${reqUrl}`
+          const status = `status: ${statusCode}`
+          const statusText = `message: ${req.statusText}`
+          const responseText = `response: ${req.responseText}`
+          reject(new Error(`Request error for ${url} ${status} ${statusText} ${responseText}`));
           return;
         }
 
